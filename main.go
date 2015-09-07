@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func removeDuplicates(a []string) []string {
+func removeDuplicates(a map[string]string) []string {
 	result := []string{}
 	seen := map[string]string{}
 	for _, val := range a {
@@ -23,12 +23,12 @@ func main() {
 
 	jsonString := os.Args[1]
 
-	var values []string
+	var values map[string]string
 	json.Unmarshal([]byte(jsonString), &values)
 
-	values = removeDuplicates(values)
+	distinctValues := removeDuplicates(values)
 
-	outputJSON, _ := json.Marshal(values)
+	outputJSON, _ := json.Marshal(distinctValues)
 
 	fmt.Println(string(outputJSON))
 }
